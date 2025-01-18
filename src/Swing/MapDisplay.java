@@ -1,8 +1,8 @@
 package Swing;
 
-import java.awt.*;
+import java.util.List;
 
 public interface MapDisplay {
-    void drawSquare(Color color, int centerSquareX, int centerSquareY, int l);
+    void drawMap(List<Integer> map);
     void clear();
 }

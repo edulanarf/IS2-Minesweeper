@@ -2,18 +2,17 @@ package model;
 
 import Swing.MapDisplay;
 
+import java.util.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MapPresenter {
-    private SquareMap square;
     private final MapDisplay mapDisplay;
-    private final MapSimulate mapSimulate;
+    private final List<Integer> map;
 
-    public MapPresenter(SquareMap square, MapDisplay mapDisplay, MapSimulate mapSimulate) {
-        this.square = square;
+    public MapPresenter(MapDisplay mapDisplay, CreateMap createMap) {
         this.mapDisplay = mapDisplay;
-        this.mapSimulate = mapSimulate;
+        map = createMap.create();
     }
 
     public void execute(){
@@ -31,7 +30,7 @@ public class MapPresenter {
 
     private void simulate() {
         this.mapDisplay.clear();
-        mapSimulate.Simulate();
-        this.mapDisplay.drawSquare(square.color(),square.centerSquareX(),square.centerSquareY(),square.l());
+        System.out.println(map);
+        this.mapDisplay.drawMap(map);
     }
 }

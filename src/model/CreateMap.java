@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MapSimulate {
+public class CreateMap {
     private final int numberOfSquares;
 
-    public MapSimulate(int numberOfSquares) {
+    public CreateMap(int numberOfSquares) {
         this.numberOfSquares = numberOfSquares;
     }
 
 
-    public void Simulate(){
+    public List<Integer> create(){
         List<Integer> map = createMapOf(numberOfSquares);
-        System.out.println(map);
+        return map;
 
     }
 
