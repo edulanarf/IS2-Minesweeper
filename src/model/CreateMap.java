@@ -12,13 +12,24 @@ public class CreateMap {
     }
 
 
-    public List<Integer> create(){
-        List<Integer> map = createMapOf(numberOfSquares);
+    public List<Integer> createMapWithBombs(List<Integer> mapEmpty){
+        List<Integer> map = createMapWithBombsOf(numberOfSquares);
         return map;
 
     }
 
-    private List<Integer> createMapOf(int numberOfSquares) {
+    public List<Integer> createMapEmpty(){
+        List<Integer> map = new ArrayList<>();
+        if (numberOfSquares==81){
+            for (int i = 0; i < numberOfSquares; i++) {
+                map.add(0);
+            }
+
+        }
+        return map;
+    }
+
+    private List<Integer> createMapWithBombsOf(int numberOfSquares) {
         List<Integer> map = new ArrayList<>();
 
         if (numberOfSquares == 81) {
@@ -32,27 +43,35 @@ public class CreateMap {
             int bombsPlaced = 0;
 
 
-            while (bombsPlaced < totalBombs) {
-                int index = rand.nextInt(numberOfSquares);
-                if (map.get(index) == 0) {
-                    map.set(index, -1);
-
-                    int row = index / 9;
-                    int col = index % 9;
-
-                    updateAdjacentCells(map, row, col);
-                    bombsPlaced++;
-                }
-            }
+            placeBombs(numberOfSquares, bombsPlaced, totalBombs, rand, map);
         }
 
+        onConsoleShow(map);
+        return map;
+    }
+
+    private void placeBombs(int numberOfSquares, int bombsPlaced, int totalBombs, Random rand, List<Integer> map) {
+        while (bombsPlaced < totalBombs) {
+            int index = rand.nextInt(numberOfSquares);
+            if (map.get(index) == 0) {
+                map.set(index, -1);
+
+                int row = index / 9;
+                int col = index % 9;
+
+                updateAdjacentCells(map, row, col);
+                bombsPlaced++;
+            }
+        }
+    }
+
+    private static void onConsoleShow(List<Integer> map) {
         for (int i = 0; i < map.size(); i++) {
             System.out.printf("%3d", map.get(i));
             if ((i + 1) % 9 == 0) {
                 System.out.println();
             }
         }
-        return map;
     }
 
     private void updateAdjacentCells(List<Integer> map, int row, int col) {

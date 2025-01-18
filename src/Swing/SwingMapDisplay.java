@@ -60,5 +60,6 @@ public class SwingMapDisplay extends JPanel implements MapDisplay {
         repaint();
     }
 
+
     private record Paint(Color color, int centerSquareX, int centerSquareY, int l){}
 }

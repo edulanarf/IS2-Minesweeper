@@ -8,11 +8,14 @@ import java.util.TimerTask;
 
 public class MapPresenter {
     private final MapDisplay mapDisplay;
-    private final List<Integer> map;
+    private final CreateMap createMap;
+    private List<Integer> map;
+    private boolean firstClick=true;
 
     public MapPresenter(MapDisplay mapDisplay, CreateMap createMap) {
         this.mapDisplay = mapDisplay;
-        map = createMap.create();
+        this.createMap = createMap;
+        map = createMap.createMapEmpty();
     }
 
     public void execute(){
@@ -28,8 +31,16 @@ public class MapPresenter {
         };
     }
 
-    private void simulate() {
+    private void simulate() {;
         this.mapDisplay.clear();
         this.mapDisplay.drawMap(map);
+    }
+
+    public void handleClick(int x, int y) {
+        System.out.println(x+y);
+        if (firstClick) {
+            map = createMap.createMapWithBombs(map);
+            firstClick = false;
+        }
     }
 }

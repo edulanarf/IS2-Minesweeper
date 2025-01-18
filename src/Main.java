@@ -6,7 +6,12 @@ public class Main {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
         int numberOfSquares = 81; //Dificultad Facil
-        new MapPresenter(frame.getMapDisplay(),new CreateMap(numberOfSquares)).execute();
+        CreateMap map = new CreateMap(numberOfSquares);
+
+        MapPresenter presenter = new MapPresenter(frame.getMapDisplay(), map);
+        frame.setPresenter(presenter);
+
+        presenter.execute();
         frame.setVisible(true);
     }
 }
