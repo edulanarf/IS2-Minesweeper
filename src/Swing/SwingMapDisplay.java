@@ -13,6 +13,7 @@ public class SwingMapDisplay extends JPanel implements MapDisplay {
     @Override
     public void drawMap(List<Integer> map) {
         synchronized (paints) {
+            paints.clear();
             int numRows = 9;
             int numCols = 9;
             int cellWidth = 70;
