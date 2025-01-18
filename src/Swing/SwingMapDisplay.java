@@ -41,7 +41,6 @@ public class SwingMapDisplay extends JPanel implements MapDisplay {
             for (Paint paint : paints) {
                 int xPosition = paint.centerSquareX() - paint.l() / 2;
                 int yPosition = paint.centerSquareY() - paint.l() / 2;
-                System.out.println("X: "+xPosition+" Y: "+yPosition);
 
                 g.setColor(paint.color());
                 g.fillRect(xPosition, yPosition, paint.l(), paint.l());

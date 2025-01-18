@@ -7,7 +7,7 @@ public class MainFrame extends JFrame{
     private MapDisplay mapDisplay;
     public MainFrame(){
         this.setTitle("Mine Sweeper");
-        this.setSize(700,700);
+        this.setSize(650,675);
         this.setLocationRelativeTo(null);
         this.add(createImageDisplayMap());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

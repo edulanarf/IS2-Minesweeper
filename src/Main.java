@@ -1,9 +1,6 @@
 import Swing.MainFrame;
 import model.MapPresenter;
 import model.CreateMap;
-import model.SquareMap;
-
-import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {

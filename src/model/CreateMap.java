@@ -35,6 +35,12 @@ public class CreateMap {
                 }
             }
         }
+        for (int i = 0; i < map.size(); i++) {
+            System.out.printf("%3d", map.get(i)); // Cada número ocupa 3 caracteres
+            if ((i + 1) % 9 == 0) { // Cada 9 números, cambia de línea
+                System.out.println();
+            }
+        }
         return map;
     }
 

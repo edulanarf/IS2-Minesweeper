@@ -30,7 +30,6 @@ public class MapPresenter {
 
     private void simulate() {
         this.mapDisplay.clear();
-        System.out.println(map);
         this.mapDisplay.drawMap(map);
     }
 }
