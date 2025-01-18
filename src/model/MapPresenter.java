@@ -37,9 +37,8 @@ public class MapPresenter {
     }
 
     public void handleClick(int x, int y) {
-        System.out.println(x+y);
         if (firstClick) {
-            map = createMap.createMapWithBombs(map);
+            map = createMap.createMapWithBombs(map, x, y);
             firstClick = false;
         }
     }
