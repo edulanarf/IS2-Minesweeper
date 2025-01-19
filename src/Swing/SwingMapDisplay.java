@@ -5,13 +5,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class SwingMapDisplay extends JPanel implements MapDisplay {
     private final List<Paint> paints = new ArrayList<>();
 
 
     @Override
-    public void drawMap(List<Integer> map) {
+    public void drawMap(List<Integer> map, Set<Integer> invalidCells) {
         synchronized (paints) {
             paints.clear();
             int numRows = 9;
@@ -27,6 +28,8 @@ public class SwingMapDisplay extends JPanel implements MapDisplay {
                     int centerY = (i * cellHeight + cellHeight / 2);
                     if (position == -1) {
                         paints.add(new Paint(Color.RED, centerX, centerY, cellWidth));
+                    } else if (invalidCells != null && (position == 0 && invalidCells.contains(index))) {
+                        paints.add(new Paint(Color.BLUE, centerX, centerY, cellWidth));
                     } else {
                         paints.add(new Paint(Color.GREEN, centerX, centerY, cellWidth));
                     }

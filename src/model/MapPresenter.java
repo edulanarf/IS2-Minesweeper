@@ -10,12 +10,14 @@ public class MapPresenter {
     private final MapDisplay mapDisplay;
     private final CreateMap createMap;
     private List<Integer> map;
+    private Set<Integer> invalidCells;
     private boolean firstClick=true;
 
     public MapPresenter(MapDisplay mapDisplay, CreateMap createMap) {
         this.mapDisplay = mapDisplay;
         this.createMap = createMap;
         map = createMap.createMapEmpty();
+
     }
 
     public void execute(){
@@ -33,12 +35,14 @@ public class MapPresenter {
 
     private void simulate() {;
         this.mapDisplay.clear();
-        this.mapDisplay.drawMap(map);
+        this.mapDisplay.drawMap(map,invalidCells);
     }
 
     public void handleClick(int x, int y) {
         if (firstClick) {
             map = createMap.createMapWithBombs(map, x, y);
+            invalidCells = createMap.getInvalidCells();
+            System.out.println(invalidCells);
             firstClick = false;
         }
     }

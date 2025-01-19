@@ -4,6 +4,7 @@ import java.util.*;
 
 public class CreateMap {
     private final int numberOfSquares;
+    private Set<Integer> invalidCells = new HashSet<>();
 
     public CreateMap(int numberOfSquares) {
         this.numberOfSquares = numberOfSquares;
@@ -47,15 +48,15 @@ public class CreateMap {
         int minExclusionSize = rand.nextInt(2) + 3;
         int maxExclusionSize = rand.nextInt(2) + 5;
         int exclusionSize = rand.nextInt(maxExclusionSize - minExclusionSize + 1) + minExclusionSize;
-        Set<Integer> invalidCells = new HashSet<>();
-        exclusionRange(exclusionSize, row, col, invalidCells);
+        exclusionRange(exclusionSize, row, col, invalidCells, rand);
 
         placeAllBombs(numberOfSquares, bombsPlaced, totalBombs, rand, map, invalidCells);
     }
 
-    private static void exclusionRange(int exclusionSize, int row, int col, Set<Integer> invalidCells) {
+    private static void exclusionRange(int exclusionSize, int row, int col, Set<Integer> invalidCells,Random rand) {
         for (int dr = -exclusionSize / 2; dr <= exclusionSize / 2; dr++) {
-            for (int dc = -exclusionSize / 2; dc <= exclusionSize / 2; dc++) {
+            int j = rand.nextInt(2)+3;
+            for (int dc = -j / 2; dc <= exclusionSize / 2; dc++) {
                 int newRow = row + dr;
                 int newCol = col + dc;
                 if (newRow >= 0 && newRow < 9 && newCol >= 0 && newCol < 9) {
@@ -70,10 +71,9 @@ public class CreateMap {
         while (bombsPlaced < totalBombs) {
             int index = rand.nextInt(numberOfSquares);
             if (map.get(index) == 0 && !invalidCells.contains(index)) {
-                map.set(index, -1);
+                map.set(index,-1);
                 int bombRow = index / 9;
                 int bombCol = index % 9;
-
                 updateAdjacentCells(map, bombRow, bombCol);
                 bombsPlaced++;
             }
@@ -90,8 +90,8 @@ public class CreateMap {
     }
 
     private void updateAdjacentCells(List<Integer> map, int row, int col) {
-        for (int dr = -1; dr <= 1; dr++) {
-            for (int dc = -1; dc <= 1; dc++) {
+        for (int dr = 1; dr <= 1; dr++) {
+            for (int dc = 1; dc <= 1; dc++) {
                 int newRow = row + dr;
                 int newCol = col + dc;
                 if (newRow >= 0 && newRow < 9 && newCol >= 0 && newCol < 9) {
@@ -115,6 +115,10 @@ public class CreateMap {
             return -1;
         }
         return i * numCols + j;
+    }
+
+    public Set<Integer> getInvalidCells(){
+        return invalidCells;
     }
 
 
